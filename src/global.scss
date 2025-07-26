@@ -35,3 +35,33 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+.custom-header {
+  --background: var(--ion-color-colorsecondseti);
+  padding: 1em;
+  margin: 0 !important;
+}
+.title-header {
+  background-color: var(--ion-color-colorseti);
+  color: var(--ion-color-colorseti-contrast);
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+}
+.main-header {
+  font-size: 1.5rem;
+}
+.date-header {
+  font-size: 1rem;
+}
+
+.danger {
+  color: #e74c3c;
+}
+
+.success {
+  color: #2ecc71;
+}
+
+.warning {
+  color: #f1c40f;
+}
