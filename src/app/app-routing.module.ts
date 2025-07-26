@@ -13,7 +13,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'new-task',
+    path: 'nueva-tarea',
     loadChildren: () =>
       import('./new-task/new-task.module').then((m) => m.NewTaskPageModule),
   },
