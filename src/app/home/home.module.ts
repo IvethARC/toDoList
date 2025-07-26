@@ -8,6 +8,7 @@ import { PriorityColorPipe } from '../pipes/priority-color.pipe';
 import { CategoryIconPipe } from '../pipes/categories-icon.pipe';
 
 @NgModule({
+  declarations: [HomePage],
   imports: [
     CommonModule,
     IonicModule,
@@ -15,6 +16,5 @@ import { CategoryIconPipe } from '../pipes/categories-icon.pipe';
     PriorityColorPipe,
     CategoryIconPipe,
   ],
-  declarations: [HomePage],
 })
 export class HomePageModule {}

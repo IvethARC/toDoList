@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TasksService, Task } from '../services/tasks.service';
 import { NewTaskPage } from '../new-task/new-task.page';
