@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Storage } from '@ionic/storage-angular';
 
@@ -22,7 +22,7 @@ export class TasksService {
   private tasks: Task[] = [];
   private tasks$ = new BehaviorSubject<Task[]>([]);
 
-  constructor(private storage: Storage) {
+  constructor(@Inject(Storage) private storage: Storage) {
     this.init();
   }
 
