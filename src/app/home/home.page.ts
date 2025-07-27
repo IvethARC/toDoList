@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TasksService, Task } from '../services/tasks.service';
 import { NewTaskPage } from '../new-task/new-task.page';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+
+registerLocaleData(localeEs, 'es');
 
 @Component({
   standalone: false,

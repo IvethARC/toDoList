@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TasksService } from '../services/tasks.service';
 import { ModalController } from '@ionic/angular';
 import { Task } from '../services/tasks.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   standalone: false,
@@ -35,7 +36,8 @@ export class NewTaskPage implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private tasksService: TasksService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private alertController: AlertController
   ) {
     this.priorities = this.tasksService.priorities;
     this.categories = this.tasksService.categories;
@@ -64,6 +66,11 @@ export class NewTaskPage implements OnInit {
   }
 
   onAddNewTask() {
+    if (this.myForm.invalid) {
+      this.presentIncompleteAlert();
+      return;
+    }
+
     if (this.myForm.invalid) return;
     const formValues = this.myForm.value;
 
@@ -83,5 +90,15 @@ export class NewTaskPage implements OnInit {
     }
 
     this.close();
+  }
+
+  async presentIncompleteAlert() {
+    const alert = await this.alertController.create({
+      header: 'Campos incompletos',
+      message:
+        'Por favor, complete todos los campos requeridos antes de continuar.',
+      buttons: ['OK'],
+    });
+    await alert.present();
   }
 }

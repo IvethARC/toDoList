@@ -36,30 +36,58 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
+ion-content,
+ion-button,
+ion-item,
+#text {
+  font-family: "Montserrat", sans-serif;
+}
+
+ion-toolbar {
+  background: linear-gradient(to right, #ffb3ff, #c34fff) !important;
+  color: white;
+}
+
+.custom-bg {
+  --background: none;
+  background-image: url("/assets/splash.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .glass-effect {
   /* From https://css.glass */
-  background: rgba(255, 255, 255, 0);
+  background: rgba(92, 11, 151, 0.14);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(2.9px);
-  -webkit-backdrop-filter: blur(2.9px);
+  backdrop-filter: blur(12.5px);
+  -webkit-backdrop-filter: blur(12.5px);
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .custom-header {
   --background: var(--ion-color-colorsecondseti);
-  padding: 1em;
+  padding: 2em 0 1em 1em;
   margin: 0 !important;
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon-header {
+  padding-right: 0.5em;
+  font-size: 18px;
+  width: 2em;
+  height: 2em;
 }
 .title-header {
-  background-color: var(--ion-color-colorseti);
   color: var(--ion-color-colorseti-contrast);
   font-family: "Montserrat", sans-serif;
-  font-weight: bold;
+  font-weight: 600;
 }
 .main-header {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 .date-header {
   font-size: 1rem;

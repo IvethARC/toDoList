@@ -1,0 +1,23 @@
+.title-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-page {
+  margin-left: 1em;
+}
+
+.select-label {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.select-icon {
+  font-size: 24px;
+  stroke-width: 38px;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.3em;
+}

@@ -1,82 +1,86 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="colorseti">
+  <ion-toolbar color="secondseti">
     <div class="custom-header">
       <div class="title-header">
-        <div class="main-header">Nueva tarea</div>
-        <div>
-          <ion-icon
-            name="close-outline"
-            (click)="close()"
-            class="close-icon"
-          ></ion-icon>
-        </div>
+        <div class="main-header">¿Que harás hoy?</div>
+      </div>
+      <div>
+        <ion-icon
+          name="close-outline"
+          (click)="close()"
+          class="icon-header"
+        ></ion-icon>
       </div>
     </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-card>
-    <form [formGroup]="myForm" (ngSubmit)="onAddNewTask()">
-      <ion-item>
-        <ion-textarea
-          placeholder="Escriba el nombre de la tarea"
-          formControlName="taskTitle"
-          [counter]="true"
-          minlength="2"
-          maxlength="27"
-          errorText="Campo es requerido"
-        >
-        </ion-textarea>
-      </ion-item>
-
-      <ion-item>
-        <ion-textarea
-          placeholder="Descripción de la tarea"
-          formControlName="taskDescription"
-          [counter]="true"
-          maxlength="100"
-          errorText="Campo es requerido"
-        >
-        </ion-textarea>
-      </ion-item>
-
-      <ion-item>
-        <ion-label class="select-label">
-          <ion-icon name="alert-circle-outline" class="select-icon"> </ion-icon>
-          Prioridad
-        </ion-label>
-        <ion-select
-          [ngClass]="myForm.get('priority')?.value | priorityColor"
-          [interfaceOptions]="customAlertOptions"
-          formControlName="priority"
-          value="Baja"
-        >
-          <ion-select-option *ngFor="let item of priorities" [value]="item">
-            {{item}}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item>
-        <ion-label class="select-label">
-          <ion-icon name="pricetags-outline" class="select-icon"> </ion-icon>
-          Categoría
-        </ion-label>
-        <ion-select
-          [interfaceOptions]="customCategoryAlertOptions"
-          formControlName="category"
-          value="Otros"
-        >
-          <ion-select-option *ngFor="let item of categories" [value]="item">
-            {{item}}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-button expand="full" color="colorseti" type="submit">
-        Agregar tarea
-      </ion-button>
-    </form>
-  </ion-card>
+<ion-content [fullscreen]="true" class="custom-bg">
+  <div class="glass-effect">
+    <ion-card>
+      <div class="title-page">
+        <ion-text color="secondseti">
+          <h2>Crea o actualiza tus pendientes:</h2>
+        </ion-text>
+      </div>
+      <form [formGroup]="myForm" (ngSubmit)="onAddNewTask()">
+        <ion-item>
+          <ion-textarea
+            placeholder="Escriba el nombre de la tarea"
+            formControlName="taskTitle"
+            [counter]="true"
+            minlength="2"
+            maxlength="27"
+            errorText="Campo es requerido"
+          >
+          </ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-textarea
+            placeholder="Descripción de la tarea"
+            formControlName="taskDescription"
+            [counter]="true"
+            maxlength="100"
+            errorText="Campo es requerido"
+          >
+          </ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label class="select-label">
+            <ion-icon name="alert-circle-outline" class="select-icon">
+            </ion-icon>
+            Prioridad
+          </ion-label>
+          <ion-select
+            [ngClass]="myForm.get('priority')?.value | priorityColor"
+            [interfaceOptions]="customAlertOptions"
+            formControlName="priority"
+            value="Baja"
+          >
+            <ion-select-option *ngFor="let item of priorities" [value]="item">
+              {{item}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label class="select-label">
+            <ion-icon name="pricetags-outline" class="select-icon"> </ion-icon>
+            Categoría
+          </ion-label>
+          <ion-select
+            [interfaceOptions]="customCategoryAlertOptions"
+            formControlName="category"
+            value="Otros"
+          >
+            <ion-select-option *ngFor="let item of categories" [value]="item">
+              {{item}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button expand="full" color="secondseti" type="submit">
+          Agregar tarea
+        </ion-button>
+      </form>
+    </ion-card>
+  </div>
 </ion-content>
