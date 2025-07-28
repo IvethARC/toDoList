@@ -49,50 +49,61 @@
             <h1>¡Hola!, estos son tus pendientes</h1>
           </ion-text>
         </div>
-        <ion-card *ngFor="let item of toDoList">
-          <ion-card-header>
-            <ion-card-title>
-              <div class="card-title">
-                <div class="task-name">{{item.title}}</div>
-                <ion-text
-                  [ngClass]="item.priority | priorityColor"
-                  class="priority-task"
+        <ion-button (click)="reloadRemoteConfig()"
+          >Reload Remote Config</ion-button
+        >
+
+        <ng-container *ngFor="let item of toDoList">
+          <ion-card *ngIf="!item.completed || showTasksCompleted">
+            <ion-card-header>
+              <ion-card-title>
+                <div class="card-title">
+                  <div class="task-name">{{item.title}}</div>
+                  <ion-text
+                    [ngClass]="item.priority | priorityColor"
+                    class="priority-task"
+                  >
+                    {{item.priority}}
+                  </ion-text>
+                </div>
+              </ion-card-title>
+              <ion-card-subtitle>
+                <ion-icon
+                  [name]="item.category | categoryIcon"
+                  [style.color]="'var(--ion-color-colorseti)'"
                 >
-                  {{item.priority}}
-                </ion-text>
-              </div>
-            </ion-card-title>
-            <ion-card-subtitle>
-              <ion-icon
-                [name]="item.category | categoryIcon"
-                [style.color]="'var(--ion-color-colorseti)'"
-              >
-              </ion-icon>
-              {{item.category}}
-            </ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content> {{item.description}} </ion-card-content>
-          <ion-row class="no-left-padding">
-            <ion-item button (click)="editTask(item)">
-              <ion-icon name="create-outline"></ion-icon>
-              <span class="custom-text">Actualizar tarea</span>
-            </ion-item>
-            <ion-item button (click)="deleteTask(item.id)">
-              <ion-icon name="trash-outline"></ion-icon>
-              <span class="custom-text">Eliminar tarea</span>
-            </ion-item>
-            <ion-item>
-              <span class="custom-text">Completada</span>
-              <ion-checkbox
-                color="secondseti"
-                [checked]="item.completed"
-                (ionChange)="toggleCompleted(item.id)"
-              >
-              </ion-checkbox>
-            </ion-item>
-          </ion-row>
-        </ion-card>
-        <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+                </ion-icon>
+                {{item.category}}
+              </ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content> {{item.description}} </ion-card-content>
+            <ion-row class="no-left-padding">
+              <ion-item button (click)="editTask(item)">
+                <ion-icon name="create-outline"></ion-icon>
+                <span class="custom-text">Actualizar tarea</span>
+              </ion-item>
+              <ion-item button (click)="deleteTask(item.id)">
+                <ion-icon name="trash-outline"></ion-icon>
+                <span class="custom-text">Eliminar tarea</span>
+              </ion-item>
+              <ion-item>
+                <span class="custom-text">Completada</span>
+                <ion-checkbox
+                  color="secondseti"
+                  [checked]="item.completed"
+                  (ionChange)="toggleCompleted(item.id)"
+                >
+                </ion-checkbox>
+              </ion-item>
+            </ion-row>
+          </ion-card>
+        </ng-container>
+        <ion-fab
+          slot="fixed"
+          vertical="bottom"
+          horizontal="end"
+          style="z-index: 100"
+        >
           <ion-fab-button color="secondseti" (click)="openAddTask()">
             <ion-icon name="add-outline" class="fab-icon"></ion-icon>
           </ion-fab-button>

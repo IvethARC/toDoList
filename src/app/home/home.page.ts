@@ -4,6 +4,7 @@ import { TasksService, Task } from '../services/tasks.service';
 import { NewTaskPage } from '../new-task/new-task.page';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { RemoteConfigService } from '../services/remote-config.service';
 
 registerLocaleData(localeEs, 'es');
 
@@ -16,16 +17,31 @@ registerLocaleData(localeEs, 'es');
 export class HomePage {
   toDoList: Task[] = [];
   today: Date = new Date();
+  showTasksCompleted = false;
 
   constructor(
     private taskService: TasksService,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private remoteConfigService: RemoteConfigService
   ) {}
 
   ngOnInit() {
     this.taskService.getTasks().subscribe((tasks) => {
       this.toDoList = tasks;
     });
+
+    this.onRemoteConfig();
+  }
+
+  async onRemoteConfig() {
+    await this.remoteConfigService.load();
+    this.showTasksCompleted = this.remoteConfigService.showCompletedTasks;
+    console.log('🔍 Flag desde Firebase:', this.showTasksCompleted);
+  }
+
+  async reloadRemoteConfig() {
+    await this.remoteConfigService.load();
+    this.showTasksCompleted = this.remoteConfigService.showCompletedTasks;
   }
 
   async openAddTask() {
