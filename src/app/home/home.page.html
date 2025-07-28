@@ -49,11 +49,30 @@
             <h1>¡Hola!, estos son tus pendientes</h1>
           </ion-text>
         </div>
-        <ion-button (click)="reloadRemoteConfig()"
+        <!-- ! Show action button Remote-config -->
+        <!-- <ion-button (click)="reloadRemoteConfig()"
           >Reload Remote Config</ion-button
-        >
+        > -->
 
-        <ng-container *ngFor="let item of toDoList">
+        <div class="fab-select">
+          <ion-segment [(ngModel)]="selectedCategory">
+            <ion-segment-button
+              *ngFor="let cat of allCategories; trackBy: trackByCategory"
+              [value]="cat"
+            >
+              <ion-icon
+                class="fab-icon"
+                [name]="cat | categoryIcon"
+                style="margin-right: 4px"
+              ></ion-icon>
+              {{ cat }}
+            </ion-segment-button>
+          </ion-segment>
+        </div>
+
+        <ng-container
+          *ngFor="let item of filteredTasks; trackBy: trackByTaskId"
+        >
           <ion-card *ngIf="!item.completed || showTasksCompleted">
             <ion-card-header>
               <ion-card-title>
@@ -70,7 +89,7 @@
               <ion-card-subtitle>
                 <ion-icon
                   [name]="item.category | categoryIcon"
-                  [style.color]="'var(--ion-color-colorseti)'"
+                  color="secondseti"
                 >
                 </ion-icon>
                 {{item.category}}

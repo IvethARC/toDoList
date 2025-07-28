@@ -76,6 +76,17 @@
               {{item}}
             </ion-select-option>
           </ion-select>
+          <ion-button fill="clear" size="small" (click)="addCategoryPrompt()">
+            Agregar categoría
+          </ion-button>
+          <ion-button
+            fill="clear"
+            size="small"
+            color="danger"
+            (click)="deleteCategoryPrompt()"
+          >
+            Eliminar categoría
+          </ion-button>
         </ion-item>
         <ion-button expand="full" color="secondseti" type="submit">
           Agregar tarea

@@ -5,6 +5,7 @@ import { NewTaskPage } from '../new-task/new-task.page';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { RemoteConfigService } from '../services/remote-config.service';
+import { CategoriesService } from '../services/categories.service';
 
 registerLocaleData(localeEs, 'es');
 
@@ -18,12 +19,15 @@ export class HomePage {
   toDoList: Task[] = [];
   today: Date = new Date();
   showTasksCompleted = false;
+  allCategories: string[] = [];
+  selectedCategory: string = 'Todas';
 
   constructor(
     private taskService: TasksService,
     public modalController: ModalController,
     private remoteConfigService: RemoteConfigService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private categoriesService: CategoriesService
   ) {}
 
   ngOnInit() {
@@ -31,6 +35,11 @@ export class HomePage {
       this.toDoList = tasks;
       this.onRemoteConfig();
     });
+
+    this.allCategories = [
+      'Todas',
+      ...this.categoriesService.getAllCategories(),
+    ];
   }
 
   async onRemoteConfig() {
@@ -42,6 +51,10 @@ export class HomePage {
   async reloadRemoteConfig() {
     await this.remoteConfigService.load();
     this.showTasksCompleted = this.remoteConfigService.showCompletedTasks;
+  }
+
+  trackByTaskId(index: number, task: Task): number {
+    return task.id;
   }
 
   async openAddTask() {
@@ -67,5 +80,19 @@ export class HomePage {
       },
     });
     return await modal.present();
+  }
+
+  get filteredTasks(): Task[] {
+    if (this.selectedCategory === 'Todas') {
+      return this.toDoList;
+    }
+
+    return this.toDoList.filter(
+      (task) => task.category === this.selectedCategory
+    );
+  }
+
+  trackByCategory(index: number, cat: string): string {
+    return cat;
   }
 }

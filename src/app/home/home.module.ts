@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { PriorityColorPipe } from '../pipes/priority-color.pipe';
 import { CategoryIconPipe } from '../pipes/categories-icon.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [HomePage],
@@ -15,6 +16,7 @@ import { CategoryIconPipe } from '../pipes/categories-icon.pipe';
     HomePageRoutingModule,
     PriorityColorPipe,
     CategoryIconPipe,
+    FormsModule,
   ],
 })
 export class HomePageModule {}

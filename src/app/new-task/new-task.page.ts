@@ -4,6 +4,7 @@ import { TasksService } from '../services/tasks.service';
 import { ModalController } from '@ionic/angular';
 import { Task } from '../services/tasks.service';
 import { AlertController } from '@ionic/angular';
+import { CategoriesService } from '../services/categories.service';
 
 @Component({
   standalone: false,
@@ -37,10 +38,10 @@ export class NewTaskPage implements OnInit {
     private modalCtrl: ModalController,
     private tasksService: TasksService,
     private fb: FormBuilder,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private categoriesService: CategoriesService
   ) {
     this.priorities = this.tasksService.priorities;
-    this.categories = this.tasksService.categories;
 
     this.myForm = this.fb.group({
       taskTitle: ['', Validators.required],
@@ -51,6 +52,7 @@ export class NewTaskPage implements OnInit {
   }
 
   ngOnInit() {
+    this.categories = this.categoriesService.getAllCategories();
     if (this.existingTask) {
       this.myForm.patchValue({
         taskTitle: this.existingTask.title,
@@ -98,6 +100,49 @@ export class NewTaskPage implements OnInit {
       message:
         'Por favor, complete todos los campos requeridos antes de continuar.',
       buttons: ['OK'],
+    });
+    await alert.present();
+  }
+
+  async addCategoryPrompt() {
+    const alert = await this.alertController.create({
+      header: 'Nueva categoría',
+      inputs: [{ name: 'name', type: 'text', placeholder: 'Nombre' }],
+      buttons: [
+        { text: 'Cancelar', role: 'cancel' },
+        {
+          text: 'Agregar',
+          handler: async (data) => {
+            await this.categoriesService.addCategory(data.name);
+            this.categories = this.categoriesService.getAllCategories();
+            this.myForm.patchValue({ category: data.name });
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
+  async deleteCategoryPrompt() {
+    const alert = await this.alertController.create({
+      header: 'Eliminar categoría',
+      inputs: this.categoriesService
+        .getAllCategories()
+        .filter((c) => !this.categoriesService.isDefault(c))
+        .map((c) => ({ name: 'name', type: 'radio', label: c, value: c })),
+      buttons: [
+        { text: 'Cancelar', role: 'cancel' },
+        {
+          text: 'Eliminar',
+          handler: async (value: string) => {
+            await this.categoriesService.removeCategory(value);
+            this.categories = this.categoriesService.getAllCategories();
+            if (this.myForm.value.category === value) {
+              this.myForm.patchValue({ category: 'Otros' });
+            }
+          },
+        },
+      ],
     });
     await alert.present();
   }
