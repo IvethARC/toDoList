@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TasksService, Task } from '../services/tasks.service';
 import { NewTaskPage } from '../new-task/new-task.page';
@@ -22,21 +22,21 @@ export class HomePage {
   constructor(
     private taskService: TasksService,
     public modalController: ModalController,
-    private remoteConfigService: RemoteConfigService
+    private remoteConfigService: RemoteConfigService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
     this.taskService.getTasks().subscribe((tasks) => {
       this.toDoList = tasks;
+      this.onRemoteConfig();
     });
-
-    this.onRemoteConfig();
   }
 
   async onRemoteConfig() {
     await this.remoteConfigService.load();
     this.showTasksCompleted = this.remoteConfigService.showCompletedTasks;
-    console.log('🔍 Flag desde Firebase:', this.showTasksCompleted);
+    this.cdr.detectChanges();
   }
 
   async reloadRemoteConfig() {

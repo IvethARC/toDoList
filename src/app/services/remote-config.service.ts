@@ -15,15 +15,17 @@ export class RemoteConfigService {
 
   constructor() {
     this.remoteConfig.settings = {
-      minimumFetchIntervalMillis: 3600000,
+      minimumFetchIntervalMillis: 0,
       fetchTimeoutMillis: 60000,
+    };
+    this.remoteConfig.defaultConfig = {
+      showCompletedTasks: true,
     };
   }
 
   async load(): Promise<void> {
     try {
       await fetchAndActivate(this.remoteConfig);
-      console.log('✅ Remote Config activado');
     } catch (error) {
       console.warn('⚠️ Error al activar Remote Config', error);
     }

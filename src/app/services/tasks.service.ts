@@ -29,7 +29,10 @@ export class TasksService {
   async init() {
     this._storage = await this.storage.create();
     const savedTasks = await this._storage.get('tasks');
-    this.tasks = savedTasks || [];
+    this.tasks = (savedTasks || []).map((task: Task) => ({
+      ...task,
+      completed: !!task.completed,
+    }));
     this.tasks$.next(this.tasks);
   }
 

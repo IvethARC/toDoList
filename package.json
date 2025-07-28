@@ -10,7 +10,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "android:dev": "ng ionic build && npx cap copy && npx cap run android -l --external"
+    "android:dev": "ionic build && npx cap copy && npx cap run android -l --external"
   },
   "private": true,
   "dependencies": {
