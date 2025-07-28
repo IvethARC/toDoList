@@ -62,6 +62,7 @@
             </ion-select-option>
           </ion-select>
         </ion-item>
+
         <ion-item>
           <ion-label class="select-label">
             <ion-icon name="pricetags-outline" class="select-icon"> </ion-icon>
@@ -76,6 +77,8 @@
               {{item}}
             </ion-select-option>
           </ion-select>
+        </ion-item>
+        <div>
           <ion-button fill="clear" size="small" (click)="addCategoryPrompt()">
             Agregar categoría
           </ion-button>
@@ -87,7 +90,8 @@
           >
             Eliminar categoría
           </ion-button>
-        </ion-item>
+        </div>
+
         <ion-button expand="full" color="secondseti" type="submit">
           Agregar tarea
         </ion-button>
