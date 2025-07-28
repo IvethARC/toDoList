@@ -65,3 +65,13 @@ ion-card-content {
   width: 1.8em;
   height: 1.8em;
 }
+
+.segment-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 8px;
+}
+
+ion-segment {
+  min-width: max-content;
+}

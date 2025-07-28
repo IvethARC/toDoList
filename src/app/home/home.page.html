@@ -55,20 +55,22 @@
         > -->
 
         <ion-card class="fab-cat">
-          <ion-segment [(ngModel)]="selectedCategory">
-            <ion-segment-button
-              *ngFor="let cat of allCategories; trackBy: trackByCategory"
-              [value]="cat"
-            >
-              <ion-icon
-                color="secondseti"
-                class="fab-icon"
-                [name]="cat | categoryIcon"
-                style="margin-right: 4px"
-              ></ion-icon>
-              {{ cat }}
-            </ion-segment-button>
-          </ion-segment>
+          <div class="segment-scroll">
+            <ion-segment [(ngModel)]="selectedCategory" scrollable>
+              <ion-segment-button
+                *ngFor="let cat of allCategories; trackBy: trackByCategory"
+                [value]="cat"
+              >
+                <ion-icon
+                  color="secondseti"
+                  class="fab-icon"
+                  [name]="cat | categoryIcon"
+                  style="margin-right: 4px"
+                ></ion-icon>
+                {{ cat }}
+              </ion-segment-button>
+            </ion-segment>
+          </div>
         </ion-card>
 
         <ng-container
