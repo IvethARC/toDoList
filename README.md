@@ -38,7 +38,7 @@ npx cap copy
 
 ---
 
-##📲 Compilar y correr en dispositivos
+## 📲 Compilar y correr en dispositivos
 
 Android
 ```bash
@@ -52,7 +52,7 @@ ionic build
 npx cap copy ios
 npx cap open ios
 ```
-##🔥 Firebase Remote Config
+## 🔥 Firebase Remote Config
 Se conecta con Remote Config para controlar dinámicamente la visibilidad de tareas completadas (flag: showCompletedTasks).
 
 ## 👩‍💻 Desarrollado por
