@@ -56,6 +56,6 @@ npx cap open ios
 Se conecta con Remote Config para controlar dinámicamente la visibilidad de tareas completadas (flag: showCompletedTasks).
 
 ## 👩‍💻 Desarrollado por
-Iveth – Software Developer
+IvethARC – Software Developer
 
 
